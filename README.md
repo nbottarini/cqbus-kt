@@ -60,7 +60,7 @@ cqBus.execute(MyCommand(), ExecutionContext().withIdentity(UserIdentity("Alice")
 cqBus.execute(MyCommand()) // returns "Anonymous"
 ```
 
-### Context-aware request handlers
+### Context-aware handlers
 
 ```kotlin
 class MyCommand: Command<String>

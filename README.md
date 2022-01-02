@@ -1,5 +1,5 @@
 # Asimov CQBus
-Simple kotlin/java command &amp; query bus. For usage in CQRS and Clean Architecture / Hexagonal.
+Simple kotlin/java command &amp; query bus. For use in CQRS and Clean Architecture / Hexagonal projects.
 
 ## Usage
 

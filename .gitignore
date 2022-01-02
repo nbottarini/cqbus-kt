@@ -1,0 +1,19 @@
+### Linux ###
+*~
+.Trash-*
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+[Dd]esktop.ini
+
+### Intellij ###
+out/
+*.ipr
+
+### Gradle ###
+build/
+.gradle/
+local.properties

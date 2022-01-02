@@ -60,7 +60,7 @@ tasks.withType<Test>().configureEach {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            artifactId = "asimov-cqbus-kt"
+            artifactId = "asimov-cqbus"
             from(components["java"])
 
             pom {

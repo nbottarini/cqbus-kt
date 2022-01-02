@@ -1,7 +1,7 @@
-package com.nbottarini.cqbus
+package com.nbottarini.asimov.cqbus
 
-import com.nbottarini.cqbus.identity.AnonymousIdentity
-import com.nbottarini.cqbus.identity.Identity
+import com.nbottarini.asimov.cqbus.identity.AnonymousIdentity
+import com.nbottarini.asimov.cqbus.identity.Identity
 
 class ExecutionContext {
     var identity: Identity = AnonymousIdentity()

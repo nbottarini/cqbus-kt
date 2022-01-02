@@ -1,3 +1,3 @@
-package com.nbottarini.cqbus.requests
+package com.nbottarini.asimov.cqbus.requests
 
 interface Query<TResponse>: Request<TResponse>

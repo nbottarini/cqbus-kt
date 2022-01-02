@@ -1,6 +1,6 @@
-package com.nbottarini.cqbus
+package com.nbottarini.asimov.cqbus
 
-import com.nbottarini.cqbus.requests.Request
+import com.nbottarini.asimov.cqbus.requests.Request
 
 interface Middleware {
     fun <T: Request<R>, R> execute(request: T, next: (T) -> R, context: ExecutionContext): R

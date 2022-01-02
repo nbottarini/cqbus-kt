@@ -2,13 +2,14 @@
 
 package com.nbottarini.cqbus
 
-import com.nbottarini.cqbus.identity.Identity
-import com.nbottarini.cqbus.requests.Command
-import com.nbottarini.cqbus.requests.InternalRequest
-import com.nbottarini.cqbus.requests.PureCommand
-import com.nbottarini.cqbus.requests.Request
-import com.nbottarini.cqbus.requests.handlers.ContextAwareRequestHandler
-import com.nbottarini.cqbus.requests.handlers.RequestHandler
+import com.nbottarini.asimov.cqbus.*
+import com.nbottarini.asimov.cqbus.identity.Identity
+import com.nbottarini.asimov.cqbus.requests.Command
+import com.nbottarini.asimov.cqbus.requests.InternalRequest
+import com.nbottarini.asimov.cqbus.requests.PureCommand
+import com.nbottarini.asimov.cqbus.requests.Request
+import com.nbottarini.asimov.cqbus.requests.handlers.ContextAwareRequestHandler
+import com.nbottarini.asimov.cqbus.requests.handlers.RequestHandler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test

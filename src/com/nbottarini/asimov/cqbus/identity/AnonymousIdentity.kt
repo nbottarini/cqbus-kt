@@ -1,4 +1,4 @@
-package com.nbottarini.cqbus.identity
+package com.nbottarini.asimov.cqbus.identity
 
 class AnonymousIdentity: Identity {
     override val name = "Anonymous"

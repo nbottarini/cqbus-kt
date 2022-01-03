@@ -15,7 +15,12 @@ class ExecutionContextTest {
     fun `can get data by type name`() {
         context.set(User("alice"))
 
-        assertThat(context.get<User>().name).isEqualTo("alice")
+        assertThat(context.get<User>()?.name).isEqualTo("alice")
+    }
+
+    @Test
+    fun `returns null if type not set`() {
+        assertThat(context.get<User>()).isNull()
     }
 
     @Test

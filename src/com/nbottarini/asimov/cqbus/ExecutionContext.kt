@@ -9,8 +9,7 @@ class ExecutionContext {
 
     operator fun get(key: String) = data[key]
 
-    @Suppress("UNCHECKED_CAST")
-    fun <T: Any> get(type: Class<T>) = get(type.name) as T
+    fun <T: Any?> get(type: Class<T>) = get(type.name) as? T
 
     inline fun <reified T: Any> get() = get(T::class.java)
 

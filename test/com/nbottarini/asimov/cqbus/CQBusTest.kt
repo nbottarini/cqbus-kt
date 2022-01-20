@@ -1,8 +1,7 @@
 @file:Suppress("ClassName")
 
-package com.nbottarini.cqbus
+package com.nbottarini.asimov.cqbus
 
-import com.nbottarini.asimov.cqbus.*
 import com.nbottarini.asimov.cqbus.identity.Identity
 import com.nbottarini.asimov.cqbus.requests.Command
 import com.nbottarini.asimov.cqbus.requests.InternalRequest

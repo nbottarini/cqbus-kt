@@ -123,7 +123,7 @@ cqBus.execute(MyCommand(), ExecutionContext().with("some-key", "some-value")) //
 class MyCommand: Command<String>
 
 class MyCommandHandler: RequestHandler<MyCommand, String> {
-    override fun execute(request: MyCommand, context: ExecutionContext): String {
+    override fun execute(request: MyCommand, identity: Identity): String {
         return "handler"
     }
 }

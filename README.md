@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.nbottarini:asimov-cqbus:0.5.2")
+    implementation("com.nbottarini:asimov-cqbus:0.5.4")
 }
 ```
 
@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.nbottarini:asimov-cqbus:0.5.2'
+    implementation 'com.nbottarini:asimov-cqbus:0.5.4'
 }
 ```
 
@@ -37,7 +37,7 @@ dependencies {
 <dependency>
     <groupId>com.nbottarini</groupId>
     <artifactId>asimov-cqbus</artifactId>
-    <version>0.5.2</version>
+    <version>0.5.4</version>
 </dependency>
 ```
 

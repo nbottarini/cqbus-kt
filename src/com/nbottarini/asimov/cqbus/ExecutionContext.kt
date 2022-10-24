@@ -28,4 +28,12 @@ class ExecutionContext {
     fun has(type: Class<*>) = has(type.name)
 
     inline fun <reified T: Any> has() = has(T::class.java)
+
+    override fun equals(other: Any?) = other is ExecutionContext && other.identity == identity && other.data == data
+
+    override fun hashCode(): Int {
+        var result = identity.hashCode()
+        result = 31 * result + data.hashCode()
+        return result
+    }
 }

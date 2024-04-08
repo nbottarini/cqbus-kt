@@ -82,8 +82,8 @@ mavenPublishing {
         }
 
         scm {
-            connection.set("scm:git:git://github.com/cqbus-kt.git")
-            developerConnection.set("scm:git:ssh://github.com/cqbus-kt.git")
+            connection.set("scm:git:git://github.com/nbottarini/cqbus-kt.git")
+            developerConnection.set("scm:git:ssh://github.com/nbottarini/cqbus-kt.git")
             url.set("https://github.com/nbottarini/cqbus-kt")
         }
     }

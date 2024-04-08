@@ -1,7 +1,7 @@
-package com.nbottarini.asimov.cqbus
+package dev.botta.cqbus
 
-import com.nbottarini.asimov.cqbus.identity.AnonymousIdentity
-import com.nbottarini.asimov.cqbus.identity.Identity
+import dev.botta.cqbus.identity.AnonymousIdentity
+import dev.botta.cqbus.identity.Identity
 
 class ExecutionContext {
     var identity: Identity = AnonymousIdentity()
@@ -9,6 +9,7 @@ class ExecutionContext {
 
     operator fun get(key: String) = data[key]
 
+    @Suppress("UNCHECKED_CAST")
     fun <T: Any?> get(type: Class<T>) = get(type.name) as? T
 
     inline fun <reified T: Any> get() = get(T::class.java)

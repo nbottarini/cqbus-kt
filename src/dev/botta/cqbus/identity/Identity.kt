@@ -1,4 +1,4 @@
-package com.nbottarini.asimov.cqbus.identity
+package dev.botta.cqbus.identity
 
 interface Identity {
     val name: String

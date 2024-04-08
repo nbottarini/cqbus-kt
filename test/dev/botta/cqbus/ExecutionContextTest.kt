@@ -1,4 +1,4 @@
-package com.nbottarini.asimov.cqbus
+package dev.botta.cqbus
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

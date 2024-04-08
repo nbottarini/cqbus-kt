@@ -1,9 +1,9 @@
-package com.nbottarini.asimov.cqbus
+package dev.botta.cqbus
 
-import com.nbottarini.asimov.cqbus.requests.InternalRequest
-import com.nbottarini.asimov.cqbus.requests.Request
-import com.nbottarini.asimov.cqbus.requests.handlers.ContextAwareRequestHandler
-import com.nbottarini.asimov.cqbus.requests.handlers.RequestHandler
+import dev.botta.cqbus.requests.InternalRequest
+import dev.botta.cqbus.requests.Request
+import dev.botta.cqbus.requests.handlers.ContextAwareRequestHandler
+import dev.botta.cqbus.requests.handlers.RequestHandler
 
 class CQBus {
     private val handlers = mutableMapOf<Class<*>, () -> RequestHandler<*, *>>()

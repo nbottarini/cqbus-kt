@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.9.23"
     id("maven-publish")
     id("signing")
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
@@ -10,8 +10,8 @@ plugins {
 val nexusUsername: String? by project
 val nexusPassword: String? by project
 
-group = "com.nbottarini"
-version = "0.5.4"
+group = "dev.botta"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -19,8 +19,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
-    testImplementation("org.assertj:assertj-core:3.21.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+    testImplementation("org.assertj:assertj-core:3.25.2")
 }
 
 tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "1.8" }
@@ -62,13 +62,13 @@ tasks.withType<Test>().configureEach {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            artifactId = "asimov-cqbus"
+            artifactId = "cqbus"
             from(components["java"])
 
             pom {
                 name.set("CQBus")
-                description.set("Simple kotlin/java command & query bus. For use in CQRS and Clean Architecture / Hexagonal projects.")
-                url.set("https://github.com/nbottarini/asimov-cqbus-kt")
+                description.set("Simple kotlin/java command and query bus. For use in CQRS and Clean Architecture / Hexagonal projects.")
+                url.set("https://github.com/nbottarini/cqbus-kt")
 
                 licenses {
                     license {
@@ -86,9 +86,9 @@ publishing {
                 }
 
                 scm {
-                    connection.set("scm:git:git://github.com/asimov-cqbus-kt.git")
-                    developerConnection.set("scm:git:ssh://github.com/asimov-cqbus-kt.git")
-                    url.set("https://github.com/nbottarini/asimov-cqbus-kt")
+                    connection.set("scm:git:git://github.com/cqbus-kt.git")
+                    developerConnection.set("scm:git:ssh://github.com/cqbus-kt.git")
+                    url.set("https://github.com/nbottarini/cqbus-kt")
                 }
             }
         }

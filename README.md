@@ -1,9 +1,9 @@
-[![Maven](https://img.shields.io/maven-central/v/com.nbottarini/asimov-cqbus.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.nbottarini%22%20AND%20a%3A%22asimov-cqbus%22)
+[![Maven](https://img.shields.io/maven-central/v/dev.botta/cqbus.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22dev.botta%22%20AND%20a%3A%22cqbus%22)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI Status](https://github.com/nbottarini/asimov-cqbus-kt/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/nbottarini/asimov-cqbus-kt/actions?query=branch%3Amain+workflow%3Aci)
+[![CI Status](https://github.com/nbottarini/cqbus-kt/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/nbottarini/cqbus-kt/actions?query=branch%3Amain+workflow%3Aci)
 
-# Asimov CQBus
-Simple kotlin/java command &amp; query bus. For use in CQRS and Clean Architecture / Hexagonal projects.
+# CQBus
+Simple kotlin/java command and query bus. For use in CQRS and Clean Architecture / Hexagonal projects.
 
 ## Installation
 
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.nbottarini:asimov-cqbus:0.5.4")
+    implementation("dev.botta:cqbus:1.0.0")
 }
 ```
 
@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.nbottarini:asimov-cqbus:0.5.4'
+    implementation 'dev.botta:cqbus:1.0.0'
 }
 ```
 
@@ -35,9 +35,9 @@ dependencies {
 
 ```xml
 <dependency>
-    <groupId>com.nbottarini</groupId>
-    <artifactId>asimov-cqbus</artifactId>
-    <version>0.5.4</version>
+    <groupId>dev.botta</groupId>
+    <artifactId>cqbus</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
 

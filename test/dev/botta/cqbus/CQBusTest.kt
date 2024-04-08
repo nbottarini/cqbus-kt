@@ -1,14 +1,14 @@
 @file:Suppress("ClassName")
 
-package com.nbottarini.asimov.cqbus
+package dev.botta.cqbus
 
-import com.nbottarini.asimov.cqbus.identity.Identity
-import com.nbottarini.asimov.cqbus.requests.Command
-import com.nbottarini.asimov.cqbus.requests.InternalRequest
-import com.nbottarini.asimov.cqbus.requests.PureCommand
-import com.nbottarini.asimov.cqbus.requests.Request
-import com.nbottarini.asimov.cqbus.requests.handlers.ContextAwareRequestHandler
-import com.nbottarini.asimov.cqbus.requests.handlers.RequestHandler
+import dev.botta.cqbus.identity.Identity
+import dev.botta.cqbus.requests.Command
+import dev.botta.cqbus.requests.InternalRequest
+import dev.botta.cqbus.requests.PureCommand
+import dev.botta.cqbus.requests.Request
+import dev.botta.cqbus.requests.handlers.ContextAwareRequestHandler
+import dev.botta.cqbus.requests.handlers.RequestHandler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test

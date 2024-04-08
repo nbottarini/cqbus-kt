@@ -1,6 +1,6 @@
 [![Maven](https://img.shields.io/maven-central/v/dev.botta/cqbus.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22dev.botta%22%20AND%20a%3A%22cqbus%22)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI Status](https://github.com/nbottarini/cqbus-kt/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/nbottarini/cqbus-kt/actions?query=branch%3Amain+workflow%3Aci)
+[![CI Status](https://github.com/nbottarini/cqbus-kt/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/nbottarini/cqbus-kt/actions?query=branch%3Amain+workflow%3Aci)
 
 # CQBus
 Simple kotlin/java command and query bus. For use in CQRS and Clean Architecture / Hexagonal projects.

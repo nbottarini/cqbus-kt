@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="CQBus" src="docs/logo_readme.png" width="80%">
+  <img alt="CQBus" src="docs/logo_readme.png" width="60%">
 </p>
 
 <!-- A spacer -->

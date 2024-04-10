@@ -60,7 +60,7 @@ mavenPublishing {
 
     pom {
         name.set("CQBus")
-        description.set("Simple kotlin/java command and query bus. For use in CQRS and Clean Architecture / Hexagonal projects.")
+        description.set("Simple Kotlin and Java command/query bus")
         inceptionYear.set("2021")
         url.set("https://github.com/nbottarini/cqbus-kt")
 

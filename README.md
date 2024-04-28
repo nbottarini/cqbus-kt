@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.botta:cqbus:1.0.0")
+    implementation("dev.botta:cqbus:1.2.0")
 }
 ```
 
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'dev.botta:cqbus:1.0.0'
+    implementation 'dev.botta:cqbus:1.2.0'
 }
 ```
 
@@ -43,7 +43,7 @@ dependencies {
 <dependency>
     <groupId>dev.botta</groupId>
     <artifactId>cqbus</artifactId>
-    <version>1.0.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -146,10 +146,34 @@ class LoggingMiddleware(private val log: MutableList<String>, private val suffix
 val log = mutableListOf<String>()
 val cqBus = CQBus()
 cqBus.registerHandler { MyCommandHandler() }
-cqBus.registerMiddleware { LoggingMiddleware(log, "1") }
-cqBus.registerMiddleware { LoggingMiddleware(log, "2") }
+cqBus.registerMiddleware(LoggingMiddleware(log, "1"))
+cqBus.registerMiddleware(LoggingMiddleware(log, "2"))
 
 cqBus.execute(MyCommand())
 
 // log contains "before2", "before1", "handler", "after1", "after2"
+```
+
+Middleware registration by priority
+```kotlin
+val log = mutableListOf<String>()
+val cqBus = CQBus()
+cqBus.registerHandler { MyCommandHandler() }
+cqBus.registerMiddleware(LoggingMiddleware(log, "Low"), MiddlewarePriorites.Low)
+cqBus.registerMiddleware(LoggingMiddleware(log, "VeryHigh1"), MiddlewarePriorities.VeryHigh)
+cqBus.registerMiddleware(LoggingMiddleware(log, "VeryHigh2"), MiddlewarePriorities.VeryHigh)
+cqBus.registerMiddleware(LoggingMiddleware(log, "Normal"))
+
+cqBus.execute(MyCommand())
+
+// log contains:
+//   "beforeVeryHigh2", 
+//   "beforeVeryHigh1", 
+//   "beforeNormal", 
+//   "beforeLow", 
+//   "handler", 
+//   "afterLow", 
+//   "afterNormal",
+//   "afterVeryHigh1",
+//   "afterVeryHigh2",
 ```

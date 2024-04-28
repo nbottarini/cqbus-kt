@@ -2,6 +2,7 @@
 
 package dev.botta.cqbus
 
+import dev.botta.cqbus.MiddlewarePriorities.*
 import dev.botta.cqbus.identity.Identity
 import dev.botta.cqbus.requests.Command
 import dev.botta.cqbus.requests.InternalRequest
@@ -98,6 +99,29 @@ class CQBusTest {
             cqBus.execute(CreateFullName("John", "Doe"))
 
             assertThat(receivedValue).isEqualTo("some-value")
+        }
+
+        @Test
+        fun `executes multiple middlewares in reverse registration order by priority`() {
+            cqBus.registerHandler { CreateFullNameLoggingHandler(log) }
+            cqBus.registerMiddleware(LoggingMiddleware(log, suffix = "Low"), Low)
+            cqBus.registerMiddleware(LoggingMiddleware(log, suffix = "VeryHigh1"), VeryHigh)
+            cqBus.registerMiddleware(LoggingMiddleware(log, suffix = "VeryHigh2"), VeryHigh)
+            cqBus.registerMiddleware(LoggingMiddleware(log, suffix = "Normal"))
+
+            cqBus.execute(CreateFullName("John", "Doe"))
+
+            assertThat(log).containsExactly(
+                "beforeVeryHigh2",
+                "beforeVeryHigh1",
+                "beforeNormal",
+                "beforeLow",
+                "John Doe",
+                "afterLow",
+                "afterNormal",
+                "afterVeryHigh1",
+                "afterVeryHigh2",
+            )
         }
     }
 

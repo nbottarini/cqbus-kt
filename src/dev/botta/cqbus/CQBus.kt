@@ -1,14 +1,20 @@
 package dev.botta.cqbus
 
-import dev.botta.cqbus.requests.InternalRequest
-import dev.botta.cqbus.requests.Request
-import dev.botta.cqbus.requests.handlers.ContextAwareRequestHandler
-import dev.botta.cqbus.requests.handlers.RequestHandler
+import dev.botta.cqbus.requests.*
+import dev.botta.cqbus.requests.handlers.*
 
 class CQBus {
     private val handlers = mutableMapOf<Class<*>, () -> RequestHandler<*, *>>()
     private val contextAwareHandlers = mutableMapOf<Class<*>, () -> ContextAwareRequestHandler<*, *>>()
-    private val middlewares = mutableListOf<Middleware>()
+    private val middlewares = mutableMapOf<MiddlewarePriorities, MutableList<Middleware>>(
+        MiddlewarePriorities.VeryHigh to mutableListOf(),
+        MiddlewarePriorities.High to mutableListOf(),
+        MiddlewarePriorities.Normal to mutableListOf(),
+        MiddlewarePriorities.Low to mutableListOf(),
+        MiddlewarePriorities.VeryLow to mutableListOf(),
+    )
+    private val sortedPriorities = MiddlewarePriorities.entries.sortedByDescending { it }
+
     var internalRequestsEnabled = false
 
     fun <T: Request<R>, R> registerHandler(requestType: Class<T>, handlerFactory: () -> RequestHandler<T, R>) {
@@ -40,9 +46,11 @@ class CQBus {
 
     private fun <R, T: Request<R>> applyMiddlewares(execute: (T) -> R, context: ExecutionContext): (T) -> R {
         var newExecute = execute
-        middlewares.forEach { middleware ->
-            val previousFunc = newExecute
-            newExecute = { middleware.execute(it, previousFunc, context) }
+        for (priority in sortedPriorities) {
+            middlewares[priority]!!.forEach { middleware ->
+                val previousFunc = newExecute
+                newExecute = { middleware.execute(it, previousFunc, context) }
+            }
         }
         return newExecute
     }
@@ -76,7 +84,7 @@ class CQBus {
 
     private fun isInternalRequest(clazz: Class<*>) = clazz.isAnnotationPresent(InternalRequest::class.java)
 
-    fun registerMiddleware(middleware: Middleware) {
-        middlewares.add(middleware)
+    fun registerMiddleware(middleware: Middleware, priority: MiddlewarePriorities = MiddlewarePriorities.Normal) {
+        middlewares[priority]!!.add(middleware)
     }
 }

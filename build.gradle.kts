@@ -1,22 +1,28 @@
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-    kotlin("jvm") version "1.9.23"
-    id("com.vanniktech.maven.publish") version "0.28.0"
-    id("dev.botta.kotlin-conventions") version "0.2.0"
+    kotlin("jvm") version "2.1.20"
+    id("com.vanniktech.maven.publish") version "0.32.0"
+    id("dev.botta.kotlin-conventions") version "0.4.2"
 }
 
 group = "dev.botta"
-version = "1.2.0"
+version = "2.0.0"
 
 repositories {
     mavenCentral()
 }
 
+kotlin {
+    jvmToolchain(23)
+}
+
 dependencies {
     implementation(kotlin("stdlib"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
-    testImplementation("org.assertj:assertj-core:3.25.3")
+    implementation(kotlin("reflect"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.1")
+    testImplementation("org.assertj:assertj-core:3.27.6")
 }
 
 mavenPublishing {
@@ -26,7 +32,7 @@ mavenPublishing {
 
     pom {
         name.set("CQBus")
-        description.set("Simple Kotlin and Java command/query bus")
+        description.set("Simple Kotlin and Java command/query bus with coroutines")
         inceptionYear.set("2021")
         url.set("https://github.com/nbottarini/cqbus-kt")
 

@@ -4,5 +4,5 @@ import dev.botta.cqbus.ExecutionContext
 import dev.botta.cqbus.requests.Request
 
 fun interface ContextAwareRequestHandler<TRequest: Request<TResponse>, TResponse> {
-    fun execute(request: TRequest, context: ExecutionContext): TResponse
+    suspend fun execute(request: TRequest, context: ExecutionContext): TResponse
 }

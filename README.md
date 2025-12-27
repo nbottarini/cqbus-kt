@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.botta:cqbus:1.2.0")
+    implementation("dev.botta:cqbus:2.0.1")
 }
 ```
 
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'dev.botta:cqbus:1.2.0'
+    implementation 'dev.botta:cqbus:2.0.1'
 }
 ```
 
@@ -43,7 +43,7 @@ dependencies {
 <dependency>
     <groupId>dev.botta</groupId>
     <artifactId>cqbus</artifactId>
-    <version>1.2.0</version>
+    <version>2.0.1</version>
 </dependency>
 ```
 

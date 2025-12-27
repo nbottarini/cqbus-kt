@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "dev.botta"
-version = "2.0.0"
+version = "1.2.0"
 
 repositories {
     mavenCentral()
@@ -20,7 +20,6 @@ kotlin {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     testImplementation("org.junit.jupiter:junit-jupiter:6.0.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.1")
     testImplementation("org.assertj:assertj-core:3.27.6")
@@ -33,7 +32,7 @@ mavenPublishing {
 
     pom {
         name.set("CQBus")
-        description.set("Simple Kotlin and Java command/query bus with coroutines")
+        description.set("Simple Kotlin and Java command/query bus")
         inceptionYear.set("2021")
         url.set("https://github.com/nbottarini/cqbus-kt")
 

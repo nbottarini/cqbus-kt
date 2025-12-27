@@ -33,7 +33,7 @@ class CQBus {
         registerContextAwareHandler(T::class.java, handlerFactory)
     }
 
-    suspend fun <T: Request<R>, R> execute(request: T, context: ExecutionContext = ExecutionContext()): R {
+    fun <T: Request<R>, R> execute(request: T, context: ExecutionContext = ExecutionContext()): R {
         failIfInternalRequest(request.javaClass)
         var execute = handlerExecuteFunc(request, context)
         execute = applyMiddlewares(execute, context)
@@ -44,7 +44,7 @@ class CQBus {
         if (!canAccessRequest(clazz)) throw CannotAccessInternalRequestError(clazz.canonicalName)
     }
 
-    private fun <R, T: Request<R>> applyMiddlewares(execute: suspend (T) -> R, context: ExecutionContext): suspend (T) -> R {
+    private fun <R, T: Request<R>> applyMiddlewares(execute: (T) -> R, context: ExecutionContext): (T) -> R {
         var newExecute = execute
         for (priority in sortedPriorities) {
             middlewares[priority]!!.forEach { middleware ->
@@ -55,8 +55,8 @@ class CQBus {
         return newExecute
     }
 
-    private fun <T: Request<R>, R> handlerExecuteFunc(request: T, context: ExecutionContext): suspend (T) -> R {
-        var executeFunc: (suspend (T) -> R)? = null
+    private fun <T: Request<R>, R> handlerExecuteFunc(request: T, context: ExecutionContext): (T) -> R {
+        var executeFunc: ((T) -> R)? = null
         val requestClass = request.javaClass
         if (handlers.containsKey(requestClass)) {
             executeFunc = regularHandlerExecuteFunc(requestClass, context)
@@ -69,13 +69,13 @@ class CQBus {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun <R, T: Request<R>> regularHandlerExecuteFunc(requestClass: Class<T>, context: ExecutionContext): suspend (T) -> R = {
+    private fun <R, T: Request<R>> regularHandlerExecuteFunc(requestClass: Class<T>, context: ExecutionContext): (T) -> R = {
         val handler = handlers[requestClass]!!.invoke() as RequestHandler<T, R>
         handler.execute(it, context.identity)
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun <R, T: Request<R>> contextAwareHandlerExecuteFunc(requestClass: Class<T>, context: ExecutionContext): suspend (T) -> R = {
+    private fun <R, T: Request<R>> contextAwareHandlerExecuteFunc(requestClass: Class<T>, context: ExecutionContext): (T) -> R = {
         val handler = contextAwareHandlers[requestClass]!!.invoke() as ContextAwareRequestHandler<T, R>
         handler.execute(it, context)
     }

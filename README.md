@@ -5,7 +5,7 @@
 <!-- A spacer -->
 <p>&nbsp;</p>
 
-<h2 align="center">Simple Kotlin and Java command/query bus with coroutines</h2>
+<h2 align="center">Simple Kotlin and Java command/query bus</h2>
 
 [![Maven](https://img.shields.io/maven-central/v/dev.botta/cqbus.svg)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22dev.botta%22%20AND%20a%3A%22cqbus%22)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.botta:cqbus:2.0.0")
+    implementation("dev.botta:cqbus:1.2.0")
 }
 ```
 
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'dev.botta:cqbus:2.0.0'
+    implementation 'dev.botta:cqbus:1.2.0'
 }
 ```
 
@@ -43,7 +43,7 @@ dependencies {
 <dependency>
     <groupId>dev.botta</groupId>
     <artifactId>cqbus</artifactId>
-    <version>2.0.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
@@ -54,7 +54,7 @@ dependencies {
 class CreateFullName(val firstName: String, val lastName: String): Command<String>
 
 class CreateFullNameHandler: RequestHandler<CreateFullName, String> {
-    override suspend fun execute(request: CreateFullName, identity: Identity): String {
+    override fun execute(request: CreateFullName, identity: Identity): String {
         return request.firstName + " " + request.lastName
     }
 }
@@ -70,7 +70,7 @@ cqBus.execute(CreateFullName("John", "Doe")) // returns "John Doe"
 class GetNews: Query<List<String>>
 
 class GetNewsHandler: RequestHandler<GetNews, List<String>> {
-    override suspend fun execute(request: GetNews, identity: Identity): List<String> {
+    override fun execute(request: GetNews, identity: Identity): List<String> {
         return listOf("news 1", "news 2")
     }
 }
@@ -94,7 +94,7 @@ class UserIdentity(override val name: String): Identity {
 class MyCommand: Command<String>
 
 class MyCommandHandler: RequestHandler<MyCommand, String> {
-    override suspend fun execute(request: MyCommand, identity: Identity): String {
+    override fun execute(request: MyCommand, identity: Identity): String {
         return identity.name
     }
 }
@@ -112,7 +112,7 @@ cqBus.execute(MyCommand()) // returns "Anonymous"
 class MyCommand: Command<String>
 
 class MyCommandHandler: ContextAwareRequestHandler<MyCommand, String> {
-    override suspend fun execute(request: MyCommand, context: ExecutionContext): String {
+    override fun execute(request: MyCommand, context: ExecutionContext): String {
         return context["some-key"] as String
     }
 }
@@ -129,13 +129,13 @@ cqBus.execute(MyCommand(), ExecutionContext().with("some-key", "some-value")) //
 class MyCommand: Command<String>
 
 class MyCommandHandler: RequestHandler<MyCommand, String> {
-    override suspend fun execute(request: MyCommand, identity: Identity): String {
+    override fun execute(request: MyCommand, identity: Identity): String {
         return "handler"
     }
 }
 
 class LoggingMiddleware(private val log: MutableList<String>, private val suffix: String = ""): Middleware {
-    override suspend fun <T: Request<R>, R> execute(request: T, next: suspend (T) -> R, context: ExecutionContext): R {
+    override fun <T: Request<R>, R> execute(request: T, next: (T) -> R, context: ExecutionContext): R {
         log.add("before$suffix")
         val result = next(request)
         log.add("after$suffix")

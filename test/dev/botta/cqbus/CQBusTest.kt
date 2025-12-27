@@ -18,7 +18,7 @@ import org.junit.jupiter.api.assertThrows
 
 class CQBusTest {
     @Test
-    suspend fun `executes request with registered handler and returns result`() {
+    fun `executes request with registered handler and returns result`() {
         cqBus.registerHandler {
             RequestHandler<CreateFullName, String> {
                 request, _ -> request.firstName + " " + request.lastName
@@ -31,7 +31,7 @@ class CQBusTest {
     }
 
     @Test
-    suspend fun `context-aware handlers can receive data via execution context`() {
+    fun `context-aware handlers can receive data via execution context`() {
         var receivedValue = ""
         cqBus.registerContextAwareHandler {
             ContextAwareRequestHandler<MyCommand, Unit> { _, context ->
@@ -45,7 +45,7 @@ class CQBusTest {
     }
 
     @Test
-    suspend fun `request handlers receive the identity executing the request`() {
+    fun `request handlers receive the identity executing the request`() {
         var receivedIdentity: Identity? = null
         val alice = UserIdentity("Alice")
         cqBus.registerHandler {
@@ -58,14 +58,14 @@ class CQBusTest {
     }
 
     @Test
-    suspend fun `fails if request handler is not registered`() {
+    fun `fails if request handler is not registered`() {
         assertThrows<RequestHandlerNotRegisteredError> { cqBus.execute(MyCommand()) }
     }
 
     @Nested
     inner class middlewares {
         @Test
-        suspend fun `executes middleware`() {
+        fun `executes middleware`() {
             cqBus.registerHandler { CreateFullNameLoggingHandler(log) }
             cqBus.registerMiddleware(LoggingMiddleware(log))
 
@@ -75,7 +75,7 @@ class CQBusTest {
         }
 
         @Test
-        suspend fun `executes multiple middlewares in reverse registration order`() {
+        fun `executes multiple middlewares in reverse registration order`() {
             cqBus.registerHandler { CreateFullNameLoggingHandler(log) }
             cqBus.registerMiddleware(LoggingMiddleware(log, suffix = "1"))
             cqBus.registerMiddleware(LoggingMiddleware(log, suffix = "2"))
@@ -86,7 +86,7 @@ class CQBusTest {
         }
 
         @Test
-        suspend fun `middlewares can pass data between each other via the execution context`() {
+        fun `middlewares can pass data between each other via the execution context`() {
             var receivedValue = ""
             cqBus.registerHandler { CreateFullNameLoggingHandler(log) }
             cqBus.registerMiddleware(SimpleMiddleware { context ->
@@ -102,7 +102,7 @@ class CQBusTest {
         }
 
         @Test
-        suspend fun `executes multiple middlewares in reverse registration order by priority`() {
+        fun `executes multiple middlewares in reverse registration order by priority`() {
             cqBus.registerHandler { CreateFullNameLoggingHandler(log) }
             cqBus.registerMiddleware(LoggingMiddleware(log, suffix = "Low"), Low)
             cqBus.registerMiddleware(LoggingMiddleware(log, suffix = "VeryHigh1"), VeryHigh)
@@ -128,7 +128,7 @@ class CQBusTest {
     @Nested
     inner class `internal requests` {
         @Test
-        suspend fun `fails if request is internal and internal requests are not enabled`() {
+        fun `fails if request is internal and internal requests are not enabled`() {
             cqBus.internalRequestsEnabled = false
             cqBus.registerHandler { MyInternalCommandHandler() }
 
@@ -136,7 +136,7 @@ class CQBusTest {
         }
 
         @Test
-        suspend fun `don't fail if handler is internal and internal requests are enabled`() {
+        fun `don't fail if handler is internal and internal requests are enabled`() {
             cqBus.internalRequestsEnabled = true
             cqBus.registerHandler { MyInternalCommandHandler() }
 
@@ -156,12 +156,12 @@ class MyCommand: PureCommand
 class MyInternalCommand: Command<Unit>
 
 class MyInternalCommandHandler: RequestHandler<MyInternalCommand, Unit> {
-    override suspend fun execute(request: MyInternalCommand, identity: Identity) {}
+    override fun execute(request: MyInternalCommand, identity: Identity) {}
 }
 
 class CreateFullNameLoggingHandler(private val log: MutableList<String>):
     RequestHandler<CreateFullName, String> {
-    override suspend fun execute(request: CreateFullName, identity: Identity): String {
+    override fun execute(request: CreateFullName, identity: Identity): String {
         val result = request.firstName + " " + request.lastName
         log.add(result)
         return result
@@ -169,7 +169,7 @@ class CreateFullNameLoggingHandler(private val log: MutableList<String>):
 }
 
 class LoggingMiddleware(private val log: MutableList<String>, private val suffix: String = ""): Middleware {
-    override suspend fun <T: Request<R>, R> execute(request: T, next: suspend (T) -> R, context: ExecutionContext): R {
+    override fun <T: Request<R>, R> execute(request: T, next: (T) -> R, context: ExecutionContext): R {
         log.add("before$suffix")
         val result = next(request)
         log.add("after$suffix")
@@ -178,7 +178,7 @@ class LoggingMiddleware(private val log: MutableList<String>, private val suffix
 }
 
 class SimpleMiddleware(private val block: (ExecutionContext) -> Unit): Middleware {
-    override suspend fun <T: Request<R>, R> execute(request: T, next: suspend (T) -> R, context: ExecutionContext): R {
+    override fun <T: Request<R>, R> execute(request: T, next: (T) -> R, context: ExecutionContext): R {
         block(context)
         return next(request)
     }

@@ -187,6 +187,6 @@ class SimpleMiddleware(private val block: (ExecutionContext) -> Unit): Middlewar
 class UserIdentity(override val name: String): Identity {
     override val isAuthenticated = true
     override val authenticationType: String? = null
-    override val roles = listOf<String>()
+    override val grants = listOf<String>()
     override val properties = mapOf<String, Any>()
 }

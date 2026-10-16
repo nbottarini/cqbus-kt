@@ -4,6 +4,6 @@ interface Identity {
     val name: String
     val isAuthenticated: Boolean
     val authenticationType: String?
-    val roles: List<String>
+    val grants: List<String>
     val properties: Map<String, Any>
 }

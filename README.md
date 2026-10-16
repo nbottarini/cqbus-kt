@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.botta:cqbus:2.0.1")
+    implementation("dev.botta:cqbus:3.0.0")
 }
 ```
 
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'dev.botta:cqbus:2.0.1'
+    implementation 'dev.botta:cqbus:3.0.0'
 }
 ```
 
@@ -43,7 +43,7 @@ dependencies {
 <dependency>
     <groupId>dev.botta</groupId>
     <artifactId>cqbus</artifactId>
-    <version>2.0.1</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
@@ -87,7 +87,7 @@ cqBus.execute(GetNews()) // returns "news 1", "news 2"
 class UserIdentity(override val name: String): Identity {
     override val isAuthenticated = true
     override val authenticationType: String? = null
-    override val roles = listOf<String>()
+    override val grants = listOf<String>()
     override val properties = mapOf<String, Any>()
 }
 

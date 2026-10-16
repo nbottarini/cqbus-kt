@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "dev.botta"
-version = "2.0.1"
+version = "3.0.0"
 
 repositories {
     mavenCentral()
